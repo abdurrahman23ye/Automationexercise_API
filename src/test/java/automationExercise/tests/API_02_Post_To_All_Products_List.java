@@ -31,6 +31,10 @@ public class API_02_Post_To_All_Products_List extends Automation_Exercise_TestBa
         JsonPath actualData=rp.jsonPath();
 
 
+
+
+
+
         Assert.assertEquals(expectedData.get("message"),actualData.getString("message"));
         Assert.assertEquals(expectedData.get("responseCode"),actualData.getInt("responseCode"));
 
