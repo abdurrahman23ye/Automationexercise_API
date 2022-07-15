@@ -6,14 +6,18 @@ import java.util.*;
 
 public class API_03_ExpectedData {
 
-    public static JSONObject API02() {
+    public static Map<String,Object> API02() {
 
-        JSONObject expectedData = new JSONObject();
+        Map<String,Object> expectedData = new HashMap<>();
         List<String>brands=new ArrayList<>();
-        brands.add("polo");
-        brands.add("H&M");
-        brands.add("Mast & Harbour");
-        brands.add("Babyhug");
+          brands.add("Polo");
+          brands.add("H&M");
+          brands.add("Madame");
+          brands.add("Mast & Harbour");
+          brands.add("Babyhug");
+          brands.add("Allen Solly Junior");
+          brands.add("Kookie Kids");
+          brands.add("Biba");
 
 
         expectedData.put("brands",brands);

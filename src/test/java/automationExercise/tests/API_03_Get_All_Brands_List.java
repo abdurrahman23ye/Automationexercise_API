@@ -10,9 +10,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
@@ -23,7 +21,7 @@ public class API_03_Get_All_Brands_List extends Automation_Exercise_TestBase {
 
         spec01.pathParams("p1", "api", "p2", "brandsList");
 
-        JSONObject expectedData= API_03_ExpectedData.API02();
+        Map<String,Object> expectedData= API_03_ExpectedData.API02();
 
 
         Response rp = given().
@@ -32,21 +30,19 @@ public class API_03_Get_All_Brands_List extends Automation_Exercise_TestBase {
                 when().
                 get("/{p1}/{p2}");
 
-       JsonPath actualData=rp.jsonPath();
+       JsonPath js=rp.jsonPath();
+
+       Map<String,Object> actualData=new HashMap<>();
+       actualData.put("responseCode",js.getInt("responseCode"));
+       actualData.put("brands",js.getList("brands.brand"));
+
+        System.out.println("actualData = " + actualData.values());
 
 
 
-
-
-
-
-
-
-
-
-
-        Assert.assertEquals(expectedData.get("responseCode"),actualData.getJsonObject("responseCode"));
-        System.out.println(actualData.getList("brands.brand"));
+        Assert.assertEquals(expectedData.get("responseCode"),actualData.get("responseCode"));
+       Assert.assertTrue(((List<String>)actualData.get("brands")).
+               containsAll((List<String>)expectedData.get("brands")));
 
 
     }
